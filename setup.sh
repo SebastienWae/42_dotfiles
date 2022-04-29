@@ -1,9 +1,11 @@
 #!/bin/bash
 
-# install homebrew
-echo "###### INSTALLING HOMEBREW ######"
-curl -fsSL https://raw.githubusercontent.com/omimouni/42homebrew/master/install-goinfre.sh | zsh
-echo ""
+if [ ! -d "~/goinfre/.brew" ]; then
+  # install homebrew
+  echo "###### INSTALLING HOMEBREW ######"
+  curl -fsSL https://raw.githubusercontent.com/omimouni/42homebrew/master/install-goinfre.sh | zsh
+  echo ""
+fi
 
 # install jq
 echo "###### INSTALLING JQ ######"

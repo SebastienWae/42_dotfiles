@@ -7,11 +7,16 @@ fi
 source ${ZDOTDIR:-${HOME}}/.zcomet/bin/zcomet.zsh
 
 # path
+export PATH=$PATH:~/goinfre/Visual\ Studio\ Code.app/Contents/Resources/app/bin
+export PATH=$PATH:/Users/$USER/Library/Python/3.8/bin
+export PATH=$PATH:/Library/Developer/CommandLineTools/Library/PrivateFrameworks/LLDB.framework/Resources
+export PATH=~/goinfre/.brew/opt/llvm/bin:$PATH
 
+# Load Homebrew config script
+source $HOME/.brewconfig.zsh
 
 # fzf
-source /usr/share/fzf/key-bindings.zsh
-source /usr/share/fzf/completion.zsh
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 zcomet load Aloxaf/fzf-tab
 
 # load pluginds
@@ -26,6 +31,7 @@ ZSH_AUTOSUGGEST_STRATEGY=(history completion)
 
 # alias
 alias la="ls -la"
+alias norm=norminette
 
 # config
 setopt globdots

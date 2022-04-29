@@ -9,6 +9,7 @@ source ${ZDOTDIR:-${HOME}}/.zcomet/bin/zcomet.zsh
 # path
 export PATH=$PATH:~/goinfre/Visual\ Studio\ Code.app/Contents/Resources/app/bin
 export PATH=$PATH:/Users/$USER/Library/Python/3.8/bin
+export PATH=$PATH:/Users/$USER/Library/Python/3.7/bin
 export PATH=$PATH:/Library/Developer/CommandLineTools/Library/PrivateFrameworks/LLDB.framework/Resources
 export PATH=~/goinfre/.brew/opt/llvm/bin:$PATH
 

@@ -37,7 +37,6 @@ alias norm=norminette
 setopt globdots
 
 # history
-export HISTFILE=.histfile
 export HISTSIZE=1000000
 export SAVEHIST=1000000
 setopt HIST_IGNORE_ALL_DUPS

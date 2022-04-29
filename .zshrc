@@ -46,6 +46,9 @@ setopt HIST_REDUCE_BLANKS
 setopt INC_APPEND_HISTORY_TIME
 setopt EXTENDED_HISTORY
 
+# completions
+fpath=(~/goinfre/.brew/share/zsh/site-functions $fpath)
+
 # run compinit and compile its cache
 zcomet compinit
 

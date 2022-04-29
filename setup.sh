@@ -57,11 +57,6 @@ echo "###### INSTALLING LLVM ######"
 brew install llvm
 echo ""
 
-# install infer
-echo "###### INSTALLING INFER ######"
-brew install infer
-echo ""
-
 # install codechecker
 echo "###### INSTALLING CODECHECKER ######"
 git clone https://github.com/Ericsson/CodeChecker.git --depth 1 ~/goinfre/codechecker

@@ -59,11 +59,7 @@ echo ""
 
 # install codechecker
 echo "###### INSTALLING CODECHECKER ######"
-git clone https://github.com/Ericsson/CodeChecker.git --depth 1 ~/goinfre/codechecker
-cd ~/goinfre/codechecker
-make venv_osx
-source $PWD/venv/bin/activate
-make package
+pip3 install --user codechecker
 echo ""
 
 # install jetbrains mono

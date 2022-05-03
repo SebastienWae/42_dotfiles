@@ -1,6 +1,6 @@
 #!/bin/bash
 
-if [ ! -d "~/goinfre/.brew" ]; then
+if [ ! -d "/goinfre/$USER/.brew" ]; then
   # install homebrew
   echo "###### INSTALLING HOMEBREW ######"
   curl -fsSL https://raw.githubusercontent.com/omimouni/42homebrew/master/install-goinfre.sh | zsh

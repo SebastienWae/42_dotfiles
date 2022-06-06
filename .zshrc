@@ -54,3 +54,5 @@ zcomet compinit
 
 # starship prompt
 eval "$(starship init zsh)"
+
+export ASAN_OPTIONS=detect_leaks=1

@@ -63,6 +63,11 @@ brew tap LouisBrunner/valgrind
 brew install --HEAD LouisBrunner/valgrind/valgrind
 echo ""
 
+# install bash-completion
+echo "###### INSTALLING BASH-COMPLETION ######"
+brew install bash-completion
+echo ""
+
 # install jetbrains mono
 echo "###### INSTALLING JETBRAINS MONO ######"
 brew tap homebrew/cask-fonts

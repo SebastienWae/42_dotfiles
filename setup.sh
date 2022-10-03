@@ -37,11 +37,6 @@ echo "###### INSTALLING RIPGREP ######"
 brew install ripgrep
 echo ""
 
-# install cmocka
-echo "###### INSTALLING CMOCKA ######"
-brew install cmocka
-echo ""
-
 # install bear
 echo "###### INSTALLING BEAR ######"
 brew install bear
@@ -60,6 +55,12 @@ echo ""
 # install codechecker
 echo "###### INSTALLING CODECHECKER ######"
 pip3 install --user codechecker
+echo ""
+
+# install valgrind
+echo "###### INSTALLING VALGRIND ######"
+brew tap LouisBrunner/valgrind
+brew install --HEAD LouisBrunner/valgrind/valgrind
 echo ""
 
 # install jetbrains mono

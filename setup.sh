@@ -1,9 +1,45 @@
 #!/bin/bash
 
-if [ ! -d "/goinfre/$USER/.brew" ]; then
-  # install homebrew
+GOINFRE="/goinfre/$USER"
+
+# install homebrew
+if [ ! -d $GOINFRE/.brew ]; then
   echo "###### INSTALLING HOMEBREW ######"
-  curl -fsSL https://raw.githubusercontent.com/omimouni/42homebrew/master/install-goinfre.sh | zsh
+  git clone --depth=1 https://github.com/Homebrew/brew $GOINFRE/.brew
+
+  cat > $HOME/.brewconfig.zsh <<EOL
+export PATH=\$GOINFRE/.brew/bin:\$PATH
+
+export HOMEBREW_CACHE=/tmp/\$USER/Homebrew/Caches
+export HOMEBREW_TEMP=/tmp/\$USER/Homebrew/Temp
+
+mkdir -p \$HOMEBREW_CACHE
+mkdir -p \$HOMEBREW_TEMP
+
+if df -T autofs,nfs \$HOME 1>/dev/null
+then
+  HOMEBREW_LOCKS_TARGET=/tmp/\$USER/Homebrew/Locks
+  HOMEBREW_LOCKS_FOLDER=\$HOME/.brew/var/homebrew
+
+  mkdir -p \$HOMEBREW_LOCKS_TARGET
+  mkdir -p \$HOMEBREW_LOCKS_FOLDER
+
+  if ! [[ -L \$HOMEBREW_LOCKS_FOLDER && -d \$HOMEBREW_LOCKS_FOLDER ]]
+  then
+     echo "Creating symlink for Locks folder"
+     rm -rf \$HOMEBREW_LOCKS_FOLDER
+     ln -s \$HOMEBREW_LOCKS_TARGET \$HOMEBREW_LOCKS_FOLDER
+  fi
+fi
+EOL
+
+  if [ ! grep -q "# Load Homebrew config script" $HOME/.zshrc ]; then
+    echo "source \$HOME/.brewconfig.zsh" >> $HOME/.zshrc
+  fi
+
+  source $HOME/.brewconfig.zsh
+  rehash
+  brew update
   echo ""
 fi
 
@@ -15,11 +51,37 @@ echo ""
 # install vscode
 echo "###### INSTALLING VSCODE ######"
 VSCODE_VERSION=$(curl -s https://formulae.brew.sh/api/cask/visual-studio-code.json | jq .version -r)
-curl -L https://update.code.visualstudio.com/$VSCODE_VERSION/darwin/stable -o ~/goinfre/vscode.zip
-unzip ~/goinfre/vscode.zip -d ~/goinfre
-rm ~/goinfre/vscode.zip
-xattr -dr com.apple.quarantine ~/goinfre/Visual\ Studio\ Code.app
-mkdir ~/goinfre/code-portable-data
+VSCODE_INSTALLED=$(/usr/libexec/PlistBuddy -c 'Print CFBundleVersion' "$GOINFRE/Visual Studio Code.app/Contents/Info.plist")
+if [ $VSCODE_VERSION != $VSCODE_INSTALLED ]; then
+	rm -rf "$GOINFRE/Visual Studio Code.app"
+	curl -L https://update.code.visualstudio.com/$VSCODE_VERSION/darwin/stable -o $GOINFRE/vscode.zip
+	unzip $GOINFRE/vscode.zip -d $GOINFRE
+	rm $GOINFRE/vscode.zip
+	xattr -dr com.apple.quarantine "$GOINFRE/Visual Studio Code.app"
+fi
+if [ ! -d $GOINFRE/code-portable-data ]; then
+	mkdir $GOINFRE/code-portable-data
+fi
+echo ""
+
+# install python
+echo "###### INSTALLING PYTHON ######"
+brew install python
+echo ""
+
+# install cmake
+echo "###### INSTALLING CMAKE ######"
+brew install cmake
+echo ""
+
+# install ninja
+echo "###### INSTALLING CMAKE ######"
+brew install cmake
+echo ""
+
+# install llvm
+echo "###### INSTALLING LLVM ######"
+brew install llvm
 echo ""
 
 # install starship
@@ -37,39 +99,18 @@ echo "###### INSTALLING RIPGREP ######"
 brew install ripgrep
 echo ""
 
-# install bear
-echo "###### INSTALLING BEAR ######"
-brew install bear
-echo ""
-
-# install node
-echo "###### INSTALLING NODE ######"
-brew install node
-echo ""
-
-# install llvm
-echo "###### INSTALLING LLVM ######"
-brew install llvm
-echo ""
-
 # install codechecker
-echo "###### INSTALLING CODECHECKER ######"
-pip3 install --user codechecker
-echo ""
+#echo "###### INSTALLING CODECHECKER ######"
+#pip3 install --user codechecker
+#echo ""
 
 # install valgrind
-echo "###### INSTALLING VALGRIND ######"
-brew tap LouisBrunner/valgrind
-brew install --HEAD LouisBrunner/valgrind/valgrind
-echo ""
+#echo "###### INSTALLING VALGRIND ######"
+#brew tap LouisBrunner/valgrind
+#brew install --HEAD LouisBrunner/valgrind/valgrind
 
 # install bash-completion
 echo "###### INSTALLING BASH-COMPLETION ######"
 brew install bash-completion
 echo ""
 
-# install jetbrains mono
-echo "###### INSTALLING JETBRAINS MONO ######"
-brew tap homebrew/cask-fonts
-brew install --cask font-jetbrains-mono
-echo ""

@@ -33,7 +33,7 @@ then
 fi
 EOL
 
-  if [ ! grep -q "# Load Homebrew config script" $HOME/.zshrc ]; then
+  if [ ! grep -q ".brewconfig.zsh" $HOME/.zshrc ]; then
     echo "source \$HOME/.brewconfig.zsh" >> $HOME/.zshrc
   fi
 
@@ -64,40 +64,40 @@ if [ ! -d $GOINFRE/code-portable-data ]; then
 fi
 echo ""
 
-# install python
-echo "###### INSTALLING PYTHON ######"
-brew install python
-echo ""
-
-# install cmake
-echo "###### INSTALLING CMAKE ######"
-brew install cmake
-echo ""
-
-# install ninja
-echo "###### INSTALLING CMAKE ######"
-brew install cmake
-echo ""
-
-# install llvm
-echo "###### INSTALLING LLVM ######"
-brew install llvm
-echo ""
-
-# install starship
-echo "###### INSTALLING STARSHIP ######"
-brew install starship
-echo ""
-
-# install fzf
-echo "###### INSTALLING FZF ######"
-brew install fzf
-echo ""
-
-# install ripgrep
-echo "###### INSTALLING RIPGREP ######"
-brew install ripgrep
-echo ""
+## install python
+#echo "###### INSTALLING PYTHON ######"
+#brew install python
+#echo ""
+#
+## install cmake
+#echo "###### INSTALLING CMAKE ######"
+#brew install cmake
+#echo ""
+#
+## install ninja
+#echo "###### INSTALLING CMAKE ######"
+#brew install cmake
+#echo ""
+#
+## install llvm
+#echo "###### INSTALLING LLVM ######"
+#brew install llvm
+#echo ""
+#
+## install starship
+#echo "###### INSTALLING STARSHIP ######"
+#brew install starship
+#echo ""
+#
+## install fzf
+#echo "###### INSTALLING FZF ######"
+#brew install fzf
+#echo ""
+#
+## install ripgrep
+#echo "###### INSTALLING RIPGREP ######"
+#brew install ripgrep
+#echo ""
 
 # install codechecker
 #echo "###### INSTALLING CODECHECKER ######"

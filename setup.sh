@@ -8,7 +8,7 @@ if [ ! -d $GOINFRE/.brew ]; then
   git clone --depth=1 https://github.com/Homebrew/brew $GOINFRE/.brew
 
   cat > $HOME/.brewconfig.zsh <<EOL
-export PATH=\$GOINFRE/.brew/bin:\$PATH
+export PATH=/goinfre/\$USER/.brew/bin:\$PATH
 
 export HOMEBREW_CACHE=/tmp/\$USER/Homebrew/Caches
 export HOMEBREW_TEMP=/tmp/\$USER/Homebrew/Temp
@@ -33,12 +33,12 @@ then
 fi
 EOL
 
-  if [ ! grep -q ".brewconfig.zsh" $HOME/.zshrc ]; then
+  if ! grep -q -v ".brewconfig.zsh" $HOME/.zshrc ; then
     echo "source \$HOME/.brewconfig.zsh" >> $HOME/.zshrc
   fi
 
   source $HOME/.brewconfig.zsh
-  rehash
+  brew analytics off
   brew update
   echo ""
 fi
@@ -52,7 +52,7 @@ echo ""
 echo "###### INSTALLING VSCODE ######"
 VSCODE_VERSION=$(curl -s https://formulae.brew.sh/api/cask/visual-studio-code.json | jq .version -r)
 VSCODE_INSTALLED=$(/usr/libexec/PlistBuddy -c 'Print CFBundleVersion' "$GOINFRE/Visual Studio Code.app/Contents/Info.plist")
-if [ $VSCODE_VERSION != $VSCODE_INSTALLED ]; then
+if [ ! $? -eq 0 ] || [ "$VSCODE_VERSION" != "$VSCODE_INSTALLED" ] ; then
 	rm -rf "$GOINFRE/Visual Studio Code.app"
 	curl -L https://update.code.visualstudio.com/$VSCODE_VERSION/darwin/stable -o $GOINFRE/vscode.zip
 	unzip $GOINFRE/vscode.zip -d $GOINFRE
@@ -89,15 +89,15 @@ echo ""
 #brew install starship
 #echo ""
 #
-## install fzf
-#echo "###### INSTALLING FZF ######"
-#brew install fzf
-#echo ""
-#
+# install fzf
+echo "###### INSTALLING FZF ######"
+brew install fzf
+echo ""
+
 ## install ripgrep
-#echo "###### INSTALLING RIPGREP ######"
-#brew install ripgrep
-#echo ""
+echo "###### INSTALLING RIPGREP ######"
+brew install ripgrep
+echo ""
 
 # install codechecker
 #echo "###### INSTALLING CODECHECKER ######"
@@ -112,5 +112,15 @@ echo ""
 # install bash-completion
 echo "###### INSTALLING BASH-COMPLETION ######"
 brew install bash-completion
+echo ""
+
+# add brew fonts cask
+echo "###### ADDING BREW FONTS CASK ######"
+brew tap homebrew/cask-fonts
+echo ""
+
+# install IBM Plex Mono font
+echo "###### INSTALLING IBM PLEX MONO FONT ######"
+brew install font-ibm-plex-mono
 echo ""
 
